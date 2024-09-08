@@ -1,3 +1,5 @@
+"use client";
+
 import toast from "react-hot-toast";
 import { Copy, CopyCheck, Server } from "lucide-react";
 
@@ -30,7 +32,10 @@ export const ApiAlert: React.FC<ApiAlertProps> = ({
 }) => {
     const [copy, setCopy] = useState(true);
     const onCopy = () =>{
-        setCopy(!copy)
+        setCopy(prevCopy => !prevCopy);
+        setTimeout(() => {
+            setCopy(prevCopy => !prevCopy);
+          }, 2000);
         navigator.clipboard.writeText(description);
         toast.success("API route copied to the clipboard");
     };

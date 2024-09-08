@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 
 import { Input } from "@/components/ui/input";
+import { useOrigin } from "@/hooks/use-origins";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { ApiAlert } from "@/components/ui/api-alert";
@@ -33,6 +34,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
 }) => {
     const params = useParams();
     const router = useRouter();
+    const origin = useOrigin();
     const [open,setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -122,7 +124,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
             <Separator/>
             <ApiAlert
                 title="NEXT_PUBLIC_API_URL"
-                description="test-desc"
+                description={`${origin}/api/${params.storeId}`}
                 variant="public"
             />   
         </>
